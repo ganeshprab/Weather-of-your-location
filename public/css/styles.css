@@ -37,6 +37,10 @@ header a {
     text-decoration: none;
 }
 
+a {
+    color: navy;
+}
+
 .portrait {
     width: 150px;
     border: solid black 2px;
