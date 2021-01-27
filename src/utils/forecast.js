@@ -16,12 +16,17 @@ const forecast = (latitude, longitude, callback) => {
                 response.body.error.info)
 
         } else {
-            const {temperature, feelslike: feelsLike, weather_descriptions} = response.body.current
+            const {temperature, weather_icons , weather_descriptions} = response.body.current
 
-            callback(undefined, 
-            `Weather Condition: ${weather_descriptions[0]}. ` + '\n' +
-            `It is currently ${temperature} degrees out. ` + '\n' +
-            `It feels like ${feelsLike} degrees out.`)
+            callback(undefined, {
+                weatherCondition: weather_descriptions[0],
+                temperature: temperature,
+                weatherIcons: weather_icons[0]
+            }
+            // `Weather Condition: ${weather_descriptions[0]}. ` + '\n' +
+            // `It is currently ${temperature} degrees out. ` + '\n' +
+            // `It feels like ${feelsLike} degrees out.`
+            )
         }
     })
 }

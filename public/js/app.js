@@ -3,7 +3,9 @@ const searchInput = document.querySelector('input')
 const loadingMessage = document.querySelector('#loadingMessage')
 const errorMessage = document.querySelector('#errorMessage')
 const responseMessageLocation = document.querySelector('#responseMessageLocation')
-const responseMessageWeather = document.querySelector('#responseMessageWeather')
+const responseMessageWeatherDescription = document.querySelector('#responseMessageWeatherDescription')
+const responseMessageTemperature = document.querySelector('#responseMessageTemperature')
+const responseMessageWeatherIcon = document.querySelector('#responseMessageWeatherIcon')
 
 
 weatherForm.addEventListener('submit', (event) => {
@@ -14,9 +16,11 @@ weatherForm.addEventListener('submit', (event) => {
     if (location != '') loadingMessage.textContent = 'Loading'
     errorMessage.textContent = ''
     responseMessageLocation.textContent = ''
-    responseMessageWeather.textContent = ''
+    responseMessageWeatherDescription.textContent = ''
+    responseMessageTemperature.textContent = ''
+    responseMessageWeatherIcon.src = ''
+    responseMessageWeatherIcon.alt = ''
 
-    
 
     fetch('/weather?address=' + location).then((response) => {
         response.json().then((data) => {
@@ -24,7 +28,10 @@ weatherForm.addEventListener('submit', (event) => {
             if (data.error) errorMessage.textContent = data.error
             else {
                 responseMessageLocation.textContent = data.location
-                responseMessageWeather.textContent = data.weather
+                responseMessageWeatherIcon.src = data.weather.weatherIcons
+                responseMessageWeatherIcon.alt = data.weather.weatherCondition + ' icon'
+                responseMessageWeatherDescription.textContent = data.weather.weatherCondition
+                responseMessageTemperature.textContent = data.weather.temperature + '°F'
                 console.log(data.addressProvided)
                 console.log(data.location)
                 console.log(data.weather)
