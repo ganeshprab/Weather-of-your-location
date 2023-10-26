@@ -1,4 +1,4 @@
-# Weather-of-your-location
+# Get Weather of your location
 
 This React app lets you get weather information of specified location
 
